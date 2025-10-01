@@ -48,6 +48,8 @@ func main() {
 	ll := convertArrtoLL(arr)
 	fmt.Println("Linked List from Array:", *ll)
 	traverseLL(ll)
+	fmt.Println("Length of linked list:", lengthOfLL(ll))
+	searchInLL(ll, 7)
 }
 
 func deletehead(head *Node) *Node {
@@ -80,6 +82,8 @@ func traverseLL(head *Node) {
 		fmt.Println("Linked List is empty")
 		return
 	}
+	// never change the value of head in any LL Problem
+	// always make a new variable to traverse the linked list
 	current := head
 	for current != nil {
 		fmt.Print(current.data, " ")
@@ -88,5 +92,37 @@ func traverseLL(head *Node) {
 	fmt.Println()
 }
 
-// never change the value of head in any LL Problem
-// always make a new variable to traverse the linked list
+func lengthOfLL(head *Node) int {
+	count := 0
+	if head == nil {
+		fmt.Println("Linked List is empty")
+		return 0
+	}
+	// never change the value of head in any LL Problem
+	// always make a new variable to traverse the linked list
+	current := head
+	for current != nil {
+		current = current.next
+		count++
+	}
+	return count
+}
+
+func searchInLL(head *Node, value int) {
+	if head == nil {
+		fmt.Println("Linked List is empty")
+		return
+	}
+	// never change the value of head in any LL Problem
+	// always make a new variable to traverse the linked list
+	current := head
+	for current != nil {
+		if current.data == value {
+			fmt.Println("Value found in linked list:", value)
+			return
+		}
+		current = current.next
+	}
+	fmt.Println(
+		"Value not found in linked list:", value)
+}
