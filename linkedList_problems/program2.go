@@ -57,6 +57,48 @@ func traversetheLL(head *LL) {
 	fmt.Println()
 }
 
+func deleteKthNode(head *LL, k int) *LL {
+	if head == nil || k <= 0 {
+		return head
+	}
+	if k == 1 {
+		return deleteHead(head)
+	}
+	count := 1
+	current := head
+	var prev *LL
+	for current != nil {
+		if count == k {
+			prev.next = prev.next.next
+			break
+		}
+		count++
+		prev = current
+		current = current.next
+	}
+	return head
+}
+
+func deleteElement(head *LL, value int) *LL {
+	if head == nil {
+		return nil
+	}
+	if head.data == value {
+		return deleteHead(head)
+	}
+	current := head
+	var prev *LL
+	for current != nil {
+		if current.data == value {
+			prev.next = prev.next.next
+			break
+		}
+		prev = current
+		current = current.next
+	}
+	return head
+}
+
 // delete a node from linked list and insert a node in linked list
 func main() {
 	arr := []int{1, 7, 11, 4, 9}
@@ -68,4 +110,11 @@ func main() {
 	ll = deleteTail(ll)
 	traversetheLL(ll)
 
+	fmt.Println("After deleting 2nd element:")
+	ll = deleteKthNode(ll, 2)
+	traversetheLL(ll)
+
+	fmt.Println("After deleting element with value 11:")
+	ll = deleteElement(ll, 11)
+	traversetheLL(ll)
 }
